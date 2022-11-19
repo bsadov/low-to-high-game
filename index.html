@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low to High Game</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+    * {
+        font-family: 'Lato', sans-serif;
+    }
+
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .row {
+        display: table;
+        clear: both;
+        content: "";
+    }
+
+    .box {
+        background: #fff;
+        border: 1px solid black;
+        float: left;
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 75px;        
+        height: 75px;
+        width: 75px;
+        margin-right: -1px;
+        margin-top: -1px;
+        padding: 0;
+    }
+</style>
+<body>
+    <h1>Low to High Game</h1>
+    <div id="gameboard">
+    </div>
+    <hr width="100%">
+    <input id="input" type="number" value="8" min="1" max="16">
+    <button id="new" onclick="newGame()">New Game</button>
+    <p id="answerText"></p>
+</body>
+<script src="main.js"></script>
+</html>
+
+<!--     <div class="row">
+            <div class="box" id="sq0"></div>
+            <div class="box" id="sq1"></div>
+            <div class="box" id="sq2"></div>
+            <div class="box" id="sq3"></div>
+    </div> -->
