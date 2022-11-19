@@ -6,5 +6,5 @@ Third Game - 10 correct 16 remembered - 91 points
 
 1. Point value is 1pt x (# of numbers)
 2. Max possible score is 91
-3. Starts at 4 numbers to memorize, then goes up by 1 until it reached 10 numbers. Then it goes up by 2 numbers - so 12, 14, 16
+3. Starts at 4 numbers to memorize, then goes up by 1 until it reaches 10 numbers. Then it goes up by 2 numbers - so 12, 14, 16
 
