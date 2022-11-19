@@ -2,6 +2,8 @@ let newBtn = document.getElementById("new")
 let gameBoard = document.getElementById("gameboard");
 let numInput = document.getElementById("input");
 let referenceArray = [], content = [];
+let score, level;
+
 
 /* for(let i=0; i <= 15; i++){
     referenceArray[i] = document.getElementById("sq"+i);
@@ -11,7 +13,8 @@ newGame();
 
 function newGame(){
     gameBoard.replaceChildren();
-
+    let level = 4;
+    let round = 1;
     let rows = 2;
     let boxes = numInput.value/2;
 
@@ -45,10 +48,30 @@ function generateBoard(numRows, numBoxes){
                 newEle.setAttribute("id", "box"+boxIndex);
                 document.getElementById('row'+i).append(newEle);
                 referenceArray[boxIndex] = document.getElementById("box"+boxIndex);
+                referenceArray[boxIndex].addEventListener("click", function(e){isLowest(Number(this.textContent))});
                 boxIndex++;
             }
         }
     }
+}
+
+function isLowest(number){
+    if(number == Math.min(...content)){
+        content = content.filter(e => e !== number);
+        console.log('isLowest Ran, new array is '+content);
+        isCorrect();
+    }
+    else{
+        isIncorrect();
+    }
+}
+
+function isCorrect(){
+
+}
+
+function isIncorrect(){
+    level--
 }
 
 function generateNumbers(number){
