@@ -1,8 +1,11 @@
 let newBtn = document.getElementById("new")
 let gameBoard = document.getElementById("gameboard");
-let numInput = document.getElementById("input");
+let levelEle = document.getElementById("level");
+let roundEle = document.getElementById("round");
+let scoreEle = document.getElementById("score");
+/* let numInput = document.getElementById("input"); */
 let referenceArray = [], content = [];
-let score, level;
+let level, round, score, rows, boxes;
 
 
 /* for(let i=0; i <= 15; i++){
@@ -12,22 +15,33 @@ let score, level;
 newGame();
 
 function newGame(){
+    level = 4;
+    round = 1;
+    score = 0;
+
+    roundStart();
+}
+
+function roundStart(){
     gameBoard.replaceChildren();
-    let level = 4;
-    let round = 1;
-    let rows = 2;
-    let boxes = numInput.value/2;
 
-    if(numInput.value == 9){
+    levelEle.textContent = level;
+    roundEle.textContent = round;
+    scoreEle.textContent = score;
+
+    rows = 2;
+    boxes = level/2;
+
+    if(level == 9){
         rows = 3;
-        boxes = numInput.value/3;
+        boxes = level/3;
     }
-    else if(numInput.value >= 10){
+    else if(level >= 10){
         rows = 4;
-        boxes = numInput.value/4;
+        boxes = level/4;
     }
 
-    generateNumbers(Number(numInput.value));
+    generateNumbers(level);
     shuffleArray(content);
     generateBoard(rows, boxes);
     fillBoxes(content);
@@ -48,36 +62,70 @@ function generateBoard(numRows, numBoxes){
                 newEle.setAttribute("id", "box"+boxIndex);
                 document.getElementById('row'+i).append(newEle);
                 referenceArray[boxIndex] = document.getElementById("box"+boxIndex);
-                referenceArray[boxIndex].addEventListener("click", function(e){isLowest(Number(this.textContent))});
+                referenceArray[boxIndex].addEventListener("click", function(){isLowest(this)});
                 boxIndex++;
             }
         }
     }
 }
 
-function isLowest(number){
-    if(number == Math.min(...content)){
+function isLowest(target){
+    let number = Number(target.textContent);
+    if(target.textContent == ''){
+        return;
+    }
+    else if(number == Math.min(...content)){
+        target.textContent = '';
         content = content.filter(e => e !== number);
-        console.log('isLowest Ran, new array is '+content);
-        isCorrect();
+        if(content.length == 0){
+            return isCorrect();
+        }
     }
     else{
-        isIncorrect();
+        return isIncorrect();
     }
 }
 
 function isCorrect(){
+    score += level;
+    if(round == 10){
+        gameComplete();
+        return
+    }
+    round++;
+    level = level<10 ? level+1 : level+2;
 
+    roundStart();
 }
 
 function isIncorrect(){
-    level--
+    if(round == 10){
+        gameComplete();
+        return
+    }
+    round++;
+    if(level !== 4){
+        level = level<10 ? level-1 : level-2;
+    }
+
+    roundStart();
+}
+
+function gameComplete(){
+    levelEle.textContent = level;
+    roundEle.textContent = round;
+    scoreEle.textContent = score;
+
+    gameBoard.replaceChildren();
+
+    let newEle = document.createElement('h1');
+    newEle.textContent = 'GAME COMPLETE, SCORE: '+score;
+
+    gameBoard.append(newEle);
 }
 
 function generateNumbers(number){
     content = [...Array(number+1).keys()].slice(1);
-    console.log(content);
-    /* content.fill(null, number, content.length) */
 }
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
