@@ -3,7 +3,7 @@ let levelEle = document.getElementById("level");
 let roundEle = document.getElementById("round");
 let scoreEle = document.getElementById("score");
 let referenceArray = [], content = [];
-let level, round, score, rows, boxes;
+let level, round, score, rows, boxes, wait;
 
 function newGame(){
     level = 4;
@@ -25,6 +25,7 @@ function roundStart(){
     scoreEle.textContent = score;
 
     rows = 2;
+    wait = level*250;
     
     if(level == 9){
         rows = 3;
@@ -37,11 +38,11 @@ function roundStart(){
 
     setTimeout(()=> {
         gameBoard.replaceChildren()
-        generateNumbers(level);
-        shuffleArray(content);
+        generateNumbers();
+        shuffleNumbers();
         generateBoard(rows, boxes);
         fillBoxes();
-        setTimeout(hideBoxes, 3000);
+        setTimeout(hideBoxes, wait);
     }, 2000);
 }
 
@@ -132,16 +133,18 @@ function gameComplete(){
     newEle.addEventListener("click", newGame);
 }
 
-function generateNumbers(number){
-    content = [...Array(number+1).keys()].slice(1);
+function generateNumbers(){
+    let numAmount = level <= 12 ? level+4 : 16;
+    content = [...Array(numAmount+1).keys()].slice(1);
 }
 
-/* Randomize array in-place using Durstenfeld shuffle algorithm */
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+/* Randomize numbers using Durstenfeld shuffle algorithm */
+function shuffleNumbers() {
+    for (let i = content.length-1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i+1));
+        [content[i], content[j]] = [content[j], content[i]];
     }
+    content = content.slice(content.length-level);
 }
 
 function fillBoxes(){
