@@ -1,4 +1,3 @@
-/* let newBtn = document.getElementById("new") */
 let gameBoard = document.getElementById("gameboard");
 let levelEle = document.getElementById("level");
 let roundEle = document.getElementById("round");
@@ -8,7 +7,7 @@ let level, round, score, rows, boxes;
 
 function newGame(){
     level = 4;
-    round = 10;
+    round = 1;
     score = 0;
 
     roundStart();
