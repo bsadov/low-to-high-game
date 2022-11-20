@@ -23,38 +23,41 @@
     h2{
         text-align: center;
         white-space: pre;
-        font-size: 3em;
+        font-size: 1em;
         height: 300px;
     }
-
-/*     #gameboard{
-        height: 200px;
-    }
-
-    .row {
-        display: table;
-        clear: both;
-        content: "";
-    } */
 
     .box {
         background: white;
         border: 1px solid black;
         float: left;
-        font-size: 75px;
+        font-size: 65px;
         font-weight: bold;
         text-align: center;
-        line-height: 100px;        
-        height: 100px;
-        width: 100px;
+        line-height: 80px;        
+        height: 80px;
+        width: 80px;
         margin-right: -1px;
         margin-top: -1px;
         padding: 0;
     }
+
+    @media screen and (min-width: 600px) {
+        h2 {
+            font-size: 3em;
+        }
+
+        .box {
+            font-size: 75px;
+            line-height: 100px;        
+            height: 100px;
+            width: 100px;
+        }
+    }
 </style>
 <body>
     <h1>Low to High Game</h1>
-    <p><strong>Level: </strong><span id="level">4</span><strong> | Round: </strong><span id="round">1</span>/10<strong> | Score: </strong><span id="score">0</span>/91</p>
+    <p><strong>Numbers: </strong><span id="level">4</span><strong> | Round: </strong><span id="round">1</span>/10<strong> | Score: </strong><span id="score">0</span>/91</p>
     <div id="gameboard">
         <h2 onclick="newGame()">Press to Start</h2>
     </div>

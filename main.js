@@ -20,12 +20,12 @@ function roundStart(){
     let newEle = document.createElement('h2');
     newEle.textContent = 'Round: '+round;
     gameBoard.append(newEle);
-    
-    setTimeout(()=> {gameBoard.replaceChildren()
-    
+
     levelEle.textContent = level;
     roundEle.textContent = round;
     scoreEle.textContent = score;
+    
+    gameBoard.replaceChildren()
 
     rows = 2;
     boxes = level/2;
@@ -43,8 +43,10 @@ function roundStart(){
     shuffleArray(content);
     generateBoard(rows, boxes);
     fillBoxes();
-    setTimeout(hideBoxes, 3000);   
-    }, 2000);
+    setTimeout(hideBoxes, 3000);
+
+/*     setTimeout(()=> {   
+    }, 2000); */
 }
 
 function generateBoard(numRows, numBoxes){
@@ -71,7 +73,7 @@ function isLowest(event){
     let target = event.target;
     let number = Number(target.textContent);
     target.removeEventListener("click", isLowest);
-    target.removeEventListener("touchstart", isLowest);
+    /* target.removeEventListener("touchstart", isLowest); */
 
     if(number == Math.min(...content)){
         content = content.filter(e => e !== number);
@@ -119,11 +121,11 @@ function gameComplete(){
     gameBoard.replaceChildren();
 
     let newEle = document.createElement('h2');
-    newEle.textContent = 'GAME COMPLETE, SCORE: '+score+'\nPress to Play Again';
-    newEle.addEventListener("click", newGame);
-    newEle.addEventListener("touchstart", newGame);
-
+    newEle.textContent = 'GAME COMPLETE, SCORE: '+score+'\nRefresh to Play Again';
     gameBoard.append(newEle);
+
+/*     newEle.addEventListener("click", newGame);
+    newEle.addEventListener("touchstart", newGame); */
 }
 
 function generateNumbers(number){
@@ -149,6 +151,6 @@ function hideBoxes(){
         referenceArray[i].style.backgroundColor = "black";
         referenceArray[i].style.border = "1px solid white";
         referenceArray[i].addEventListener("click", isLowest);
-        referenceArray[i].addEventListener("touchstart", isLowest);
+        /* referenceArray[i].addEventListener("touchstart", isLowest); */
     }
 }
