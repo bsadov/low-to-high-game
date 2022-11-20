@@ -20,11 +20,22 @@
         flex-direction: column;
     }
 
+    h2{
+        text-align: center;
+        white-space: pre;
+        font-size: 3em;
+        height: 300px;
+    }
+
+/*     #gameboard{
+        height: 200px;
+    }
+
     .row {
         display: table;
         clear: both;
         content: "";
-    }
+    } */
 
     .box {
         background: white;
@@ -43,11 +54,12 @@
 </style>
 <body>
     <h1>Low to High Game</h1>
-    <p><strong>Level: </strong><span id="level"></span><strong> | Round: </strong><span id="round"></span>/10<strong> | Score: </strong><span id="score"></span>/91</p>
+    <p><strong>Level: </strong><span id="level">4</span><strong> | Round: </strong><span id="round">1</span>/10<strong> | Score: </strong><span id="score">0</span>/91</p>
     <div id="gameboard">
+        <h2 onclick="newGame()">Press to Start</h2>
     </div>
     <br>
-    <button id="new" onclick="newGame()">New Game</button>
+    <!-- <button id="new" onclick="newGame()">New Game</button> -->
     <p id="answerText"></p>
 </body>
 <script src="main.js"></script>

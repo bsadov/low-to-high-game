@@ -1,12 +1,10 @@
-let newBtn = document.getElementById("new")
+/* let newBtn = document.getElementById("new") */
 let gameBoard = document.getElementById("gameboard");
 let levelEle = document.getElementById("level");
 let roundEle = document.getElementById("round");
 let scoreEle = document.getElementById("score");
 let referenceArray = [], content = [];
 let level, round, score, rows, boxes;
-
-newGame();
 
 function newGame(){
     level = 4;
@@ -19,6 +17,12 @@ function newGame(){
 function roundStart(){
     gameBoard.replaceChildren();
 
+    let newEle = document.createElement('h2');
+    newEle.textContent = 'Round: '+round;
+    gameBoard.append(newEle);
+    
+    setTimeout(()=> {gameBoard.replaceChildren()
+    
     levelEle.textContent = level;
     roundEle.textContent = round;
     scoreEle.textContent = score;
@@ -39,7 +43,8 @@ function roundStart(){
     shuffleArray(content);
     generateBoard(rows, boxes);
     fillBoxes();
-    setTimeout(hideBoxes, 3000);
+    setTimeout(hideBoxes, 3000);   
+    }, 2000);
 }
 
 function generateBoard(numRows, numBoxes){
@@ -113,8 +118,10 @@ function gameComplete(){
 
     gameBoard.replaceChildren();
 
-    let newEle = document.createElement('h1');
-    newEle.textContent = 'GAME COMPLETE, SCORE: '+score;
+    let newEle = document.createElement('h2');
+    newEle.textContent = 'GAME COMPLETE, SCORE: '+score+'\nPress to Play Again';
+    newEle.addEventListener("click", newGame);
+    newEle.addEventListener("touchstart", newGame);
 
     gameBoard.append(newEle);
 }
