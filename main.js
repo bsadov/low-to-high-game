@@ -16,8 +16,8 @@ function newGame(){
 function roundStart(){
     gameBoard.replaceChildren();
 
-    let newEle = document.createElement('h2');
-    newEle.textContent = 'Round: '+round;
+    let newEle = document.createElement("h2");
+    newEle.textContent = "Round: "+round;
     gameBoard.append(newEle);
 
     levelEle.textContent = level;
@@ -48,16 +48,16 @@ function roundStart(){
 function generateBoard(numRows, numBoxes){
     let boxIndex = 0;
     for(i=0; i < numRows; i++){
-        let newEle = document.createElement('div');
+        let newEle = document.createElement("div");
         newEle.setAttribute("class", "row");
         newEle.setAttribute("id", "row"+i);
         gameBoard.append(newEle);
         if(numBoxes){
             for(j=0; j < numBoxes && boxIndex < level; j++){
-                let newEle = document.createElement('div');
+                let newEle = document.createElement("div");
                 newEle.setAttribute("class", "box");
                 newEle.setAttribute("id", "box"+boxIndex);
-                document.getElementById('row'+i).append(newEle);
+                document.getElementById("row"+i).append(newEle);
                 referenceArray[boxIndex] = document.getElementById("box"+boxIndex);
                 boxIndex++;
             }
@@ -84,28 +84,38 @@ function isLowest(event){
 }
 
 function isCorrect(){
+    gameBoard.replaceChildren();
+    let newEle = document.createElement("h2");
+    newEle.textContent = "Correct!";
+    newEle.style.color = "green";
+    gameBoard.append(newEle);
+
     score += level;
     if(round == 10){
-        gameComplete();
-        return
+        return setTimeout(gameComplete, 1000);
     }
     round++;
     level = level<10 ? level+1 : level+2;
 
-    roundStart();
+    setTimeout(roundStart, 1000);
 }
 
 function isIncorrect(){
+    gameBoard.replaceChildren();
+    let newEle = document.createElement("h2");
+    newEle.textContent = "Incorrect!";
+    newEle.style.color = "red";
+    gameBoard.append(newEle);
+
     if(round == 10){
-        gameComplete();
-        return
+        return setTimeout(gameComplete, 1000);
     }
     round++;
     if(level !== 4){
         level = level<=10 ? level-1 : level-2;
     }
 
-    roundStart();
+    setTimeout(roundStart, 1000);
 }
 
 function gameComplete(){
@@ -115,8 +125,8 @@ function gameComplete(){
 
     gameBoard.replaceChildren();
 
-    let newEle = document.createElement('h3');
-    newEle.textContent = 'GAME COMPLETE, SCORE: '+score+'\n Press to Play Again';
+    let newEle = document.createElement("h3");
+    newEle.textContent = "GAME COMPLETE, SCORE: "+score+"\n Press to Play Again";
     gameBoard.append(newEle);
 
     newEle.addEventListener("click", newGame);
