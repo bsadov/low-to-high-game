@@ -8,7 +8,7 @@ let level, round, score, rows, boxes;
 
 function newGame(){
     level = 4;
-    round = 1;
+    round = 10;
     score = 0;
 
     roundStart();
@@ -24,7 +24,9 @@ function roundStart(){
     levelEle.textContent = level;
     roundEle.textContent = round;
     scoreEle.textContent = score;
-    
+
+    setTimeout(()=> {
+
     gameBoard.replaceChildren()
 
     rows = 2;
@@ -44,9 +46,7 @@ function roundStart(){
     generateBoard(rows, boxes);
     fillBoxes();
     setTimeout(hideBoxes, 3000);
-
-/*     setTimeout(()=> {   
-    }, 2000); */
+    }, 2000);
 }
 
 function generateBoard(numRows, numBoxes){
@@ -73,7 +73,6 @@ function isLowest(event){
     let target = event.target;
     let number = Number(target.textContent);
     target.removeEventListener("click", isLowest);
-    /* target.removeEventListener("touchstart", isLowest); */
 
     if(number == Math.min(...content)){
         content = content.filter(e => e !== number);
@@ -121,11 +120,10 @@ function gameComplete(){
     gameBoard.replaceChildren();
 
     let newEle = document.createElement('h2');
-    newEle.textContent = 'GAME COMPLETE, SCORE: '+score+'\nRefresh to Play Again';
+    newEle.textContent = 'GAME COMPLETE, SCORE: '+score+'\n Press to Play Again';
     gameBoard.append(newEle);
 
-/*     newEle.addEventListener("click", newGame);
-    newEle.addEventListener("touchstart", newGame); */
+    newEle.addEventListener("click", newGame);
 }
 
 function generateNumbers(number){
@@ -151,6 +149,5 @@ function hideBoxes(){
         referenceArray[i].style.backgroundColor = "black";
         referenceArray[i].style.border = "1px solid white";
         referenceArray[i].addEventListener("click", isLowest);
-        /* referenceArray[i].addEventListener("touchstart", isLowest); */
     }
 }
