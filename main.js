@@ -118,7 +118,7 @@ function gameComplete(){
 
     gameBoard.replaceChildren();
 
-    let newEle = document.createElement('h2');
+    let newEle = document.createElement('h3');
     newEle.textContent = 'GAME COMPLETE, SCORE: '+score+'\n Press to Play Again';
     gameBoard.append(newEle);
 
