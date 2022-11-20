@@ -50,7 +50,7 @@ function generateBoard(numRows, numBoxes){
         newEle.setAttribute("id", "row"+i);
         gameBoard.append(newEle);
         if(numBoxes){
-            for(j=0; j < numBoxes; j++){
+            for(j=0; j < numBoxes && boxIndex < level; j++){
                 let newEle = document.createElement('div');
                 newEle.setAttribute("class", "box");
                 newEle.setAttribute("id", "box"+boxIndex);
@@ -66,6 +66,7 @@ function isLowest(event){
     let target = event.target;
     let number = Number(target.textContent);
     target.removeEventListener("click", isLowest);
+    target.removeEventListener("touchstart", isLowest);
 
     if(number == Math.min(...content)){
         content = content.filter(e => e !== number);
@@ -141,5 +142,6 @@ function hideBoxes(){
         referenceArray[i].style.backgroundColor = "black";
         referenceArray[i].style.border = "1px solid white";
         referenceArray[i].addEventListener("click", isLowest);
+        referenceArray[i].addEventListener("touchstart", isLowest);
     }
 }
