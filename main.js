@@ -24,27 +24,24 @@ function roundStart(){
     roundEle.textContent = round;
     scoreEle.textContent = score;
 
-    setTimeout(()=> {
-
-    gameBoard.replaceChildren()
-
     rows = 2;
-    boxes = level/2;
-
+    
     if(level == 9){
         rows = 3;
-        boxes = level/3;
     }
     else if(level >= 10){
         rows = 4;
-        boxes = level/4;
     }
 
-    generateNumbers(level);
-    shuffleArray(content);
-    generateBoard(rows, boxes);
-    fillBoxes();
-    setTimeout(hideBoxes, 3000);
+    boxes = level/rows;
+
+    setTimeout(()=> {
+        gameBoard.replaceChildren()
+        generateNumbers(level);
+        shuffleArray(content);
+        generateBoard(rows, boxes);
+        fillBoxes();
+        setTimeout(hideBoxes, 3000);
     }, 2000);
 }
 
@@ -105,7 +102,7 @@ function isIncorrect(){
     }
     round++;
     if(level !== 4){
-        level = level<10 ? level-1 : level-2;
+        level = level<=10 ? level-1 : level-2;
     }
 
     roundStart();
