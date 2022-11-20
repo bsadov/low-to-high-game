@@ -27,15 +27,15 @@
     }
 
     .box {
-        background: #fff;
+        background: white;
         border: 1px solid black;
         float: left;
-        font-size: 50px;
+        font-size: 75px;
         font-weight: bold;
         text-align: center;
-        line-height: 75px;        
-        height: 75px;
-        width: 75px;
+        line-height: 100px;        
+        height: 100px;
+        width: 100px;
         margin-right: -1px;
         margin-top: -1px;
         padding: 0;
@@ -43,22 +43,12 @@
 </style>
 <body>
     <h1>Low to High Game</h1>
-    <p><strong>Level: </strong><span id="level"></span>
-    <br><strong>Round: </strong><span id="round"></span>/10
-    <br><strong>Score: </strong><span id="score"></span>/91</p>
+    <p><strong>Level: </strong><span id="level"></span><strong> | Round: </strong><span id="round"></span>/10<strong> | Score: </strong><span id="score"></span>/91</p>
     <div id="gameboard">
     </div>
     <br>
-    <!-- <input id="input" type="number" value="8" min="4" max="16"> -->
     <button id="new" onclick="newGame()">New Game</button>
     <p id="answerText"></p>
 </body>
 <script src="main.js"></script>
 </html>
-
-<!--     <div class="row">
-            <div class="box" id="sq0"></div>
-            <div class="box" id="sq1"></div>
-            <div class="box" id="sq2"></div>
-            <div class="box" id="sq3"></div>
-    </div> -->

@@ -3,14 +3,8 @@ let gameBoard = document.getElementById("gameboard");
 let levelEle = document.getElementById("level");
 let roundEle = document.getElementById("round");
 let scoreEle = document.getElementById("score");
-/* let numInput = document.getElementById("input"); */
 let referenceArray = [], content = [];
 let level, round, score, rows, boxes;
-
-
-/* for(let i=0; i <= 15; i++){
-    referenceArray[i] = document.getElementById("sq"+i);
-} */
 
 newGame();
 
@@ -44,9 +38,9 @@ function roundStart(){
     generateNumbers(level);
     shuffleArray(content);
     generateBoard(rows, boxes);
-    fillBoxes(content);
+    fillBoxes();
+    setTimeout(hideBoxes, 3000);
 }
-
 
 function generateBoard(numRows, numBoxes){
     let boxIndex = 0;
@@ -62,21 +56,21 @@ function generateBoard(numRows, numBoxes){
                 newEle.setAttribute("id", "box"+boxIndex);
                 document.getElementById('row'+i).append(newEle);
                 referenceArray[boxIndex] = document.getElementById("box"+boxIndex);
-                referenceArray[boxIndex].addEventListener("click", function(){isLowest(this)});
                 boxIndex++;
             }
         }
     }
 }
 
-function isLowest(target){
+function isLowest(event){
+    let target = event.target;
     let number = Number(target.textContent);
-    if(target.textContent == ''){
-        return;
-    }
-    else if(number == Math.min(...content)){
-        target.textContent = '';
+    target.removeEventListener("click", isLowest);
+
+    if(number == Math.min(...content)){
         content = content.filter(e => e !== number);
+        target.style.backgroundColor = "white";
+        target.style.border = "1px solid black";
         if(content.length == 0){
             return isCorrect();
         }
@@ -136,9 +130,16 @@ function shuffleArray(array) {
     }
 }
 
-function fillBoxes(array){
-    for (let i = 0; i <= array.length-1; i++){
-        referenceArray[i].textContent = array[i];
-        /* console.log(referenceArray[i].textContent); */
+function fillBoxes(){
+    for (let i = 0; i <= content.length-1; i++){
+        referenceArray[i].textContent = content[i];
+    }
+}
+
+function hideBoxes(){
+    for (let i = 0; i <= content.length-1; i++){
+        referenceArray[i].style.backgroundColor = "black";
+        referenceArray[i].style.border = "1px solid white";
+        referenceArray[i].addEventListener("click", isLowest);
     }
 }
